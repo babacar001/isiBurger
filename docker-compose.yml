@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: isi_burger_container
+    restart: always
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+
+  db:
+    image: isi_burger:latest
+    container_name: isi_burger_container
+    restart: always
+    environment:
+      POSTGRES_DB: gesBurger
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1793
+    ports:
+      - "5432:5432"
